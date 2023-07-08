@@ -7,16 +7,20 @@ public class AIController : MonoBehaviour
 {
 
     [SerializeField] Transform ordine;
+    [SerializeField] Transform magazzino;
+    [SerializeField] Transform cucina;
 
     NavMeshAgent agent;
 
     AIState currentState;
 
+
+
     private void Start()
     {
         agent = transform.GetComponent<NavMeshAgent>();
         
-        currentState = new Idle(agent, this.gameObject, ordine);
+        currentState = new Idle(agent, this.gameObject, ordine, magazzino, cucina);
     }
 
     private void Update()
@@ -24,4 +28,6 @@ public class AIController : MonoBehaviour
         currentState = currentState.Process();
         //Debug.Log(currentState.name);
     }
+
+    
 }
