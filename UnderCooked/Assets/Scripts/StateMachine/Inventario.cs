@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class Inventario : MonoBehaviour
 {
-    [SerializeField] static int mele = 5;
-    [SerializeField] int patate   = 5;
-    [SerializeField] int carote   = 5;
+    #region Instanza
+    public static Inventario current;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
-        
+        if (current == null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Ingredienti")]
+    public int patate;
+    public int pomodori;
+    public int carote;
+    
+   
 }
