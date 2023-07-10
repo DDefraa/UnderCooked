@@ -2,9 +2,6 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -56,75 +53,75 @@ public class TakeOrder : AIState
 
 
 
-            
-            
-
-
-                if (Inventario.current.patate == 0 || Inventario.current.pomodori == 0 && scelta == DishType.Pizza)
-                {
-
-                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
-
-
-                    Debug.Log("Mancano Ing.Pizza");
-
-                }
-                else
-                {
-                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
-                    Debug.Log("Andiamo a fare la Pizza");
-                    return;
-
-                }
-            
 
 
 
-            
-            
-                if (Inventario.current.carote == 0 || Inventario.current.patate == 0 && scelta == DishType.Pasta)
-                {
 
-                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
-                    //return;
+            if (Inventario.current.patate == 0 || Inventario.current.pomodori == 0 && scelta == DishType.Pizza)
+            {
 
-                    Debug.Log("Mancano Ing.Pasta");
-                }
-                else
-                {
-                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
-                    Debug.Log("Andiamo a fare la pasta");
-                    return;
-
-                }
-            
+                nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
 
 
-            
-            
-                if (Inventario.current.pomodori == 0 || Inventario.current.carote == 0 && scelta == DishType.Lasagna)
-                {
+                Debug.Log("Mancano Ing.Pizza");
 
-                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
+            }
+            else
+            {
+                nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
+                Debug.Log("Andiamo a fare la Pizza");
+                return;
+
+            }
 
 
-                    Debug.Log("Mancano Ing.Lasagne");
 
-                }
-                else
-                {
-                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                    stage = Event.Exit;
-                    Debug.Log("Andiamo a fare le lasagne");
-                    return;
 
-                }
-            
+
+
+            if (Inventario.current.carote == 0 || Inventario.current.patate == 0 && scelta == DishType.Pasta)
+            {
+
+                nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
+                //return;
+
+                Debug.Log("Mancano Ing.Pasta");
+            }
+            else
+            {
+                nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
+                Debug.Log("Andiamo a fare la pasta");
+                return;
+
+            }
+
+
+
+
+
+            if (Inventario.current.pomodori == 0 || Inventario.current.carote == 0 && scelta == DishType.Lasagna)
+            {
+
+                nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
+
+
+                Debug.Log("Mancano Ing.Lasagne");
+
+            }
+            else
+            {
+                nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                stage = Event.Exit;
+                Debug.Log("Andiamo a fare le lasagne");
+                return;
+
+            }
+
 
 
 
