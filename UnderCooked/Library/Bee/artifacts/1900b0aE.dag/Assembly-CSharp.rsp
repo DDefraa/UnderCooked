@@ -356,6 +356,7 @@
 "Assets/Scripts/MoveTo.cs"
 "Assets/Scripts/StateMachine/AIController.cs"
 "Assets/Scripts/StateMachine/AIState.cs"
+"Assets/Scripts/StateMachine/DeliverPlate.cs"
 "Assets/Scripts/StateMachine/GoKitchen.cs"
 "Assets/Scripts/StateMachine/Idle.cs"
 "Assets/Scripts/StateMachine/Inventario.cs"

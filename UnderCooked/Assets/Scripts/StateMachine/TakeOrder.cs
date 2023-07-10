@@ -10,133 +10,136 @@ using UnityEngine.AI;
 
 public class TakeOrder : AIState
 {
+
+    public enum DishType
+    {
+        Pizza,
+        Lasagna,
+        Pasta
+    }
+
+    public static DishType scelta;
+
     
 
-    public TakeOrder(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _magazzino, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _magazzino, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
+    
+
+    
+
+    public TakeOrder(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _consegna, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
     {
         name = State.TakeOrder;
     }
 
-    bool ordinare;
-    bool conferma;
-    bool next;
-
-    int scelta;
-    float timer;
-
     public override void Enter()
     {
-       
-
         base.Enter();
-
-        conferma = false;
-        next = false;
-        timer = 2;
-        scelta = UnityEngine.Random.Range(0, 3);
-
-
         
+        scelta = (DishType)UnityEngine.Random.Range(0, 2);
+        Debug.Log(scelta);
+        agent.SetDestination(ordine.position);
 
+        //int numero = RestoreFood.num;
+       
     }
-
 
     public override void Update()
     {
-        agent.SetDestination(ordine.position);
-        if (Vector3.Distance(ordine.position, player.transform.position) < 2f)
-        {
-            ordinare = true;
-            Debug.Log("si può ordinare");
+    
 
-        }
-        //agent.SetDestination(ordine.position);
 
         base.Update();
 
-            if (ordinare)
-            {
-                timer += Time.deltaTime;
-                SceltaOrdine(scelta);
-                
-                conferma = true;
-            }
-            if (conferma)
-            {
-                
-                ordinare = false;
-                nextState = new GoKitchen(agent, player, ordine, magazzino, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-                stage = Event.Exit;
-                
-                
-            }
-        //if (!Pronto())
-        //{
-        //}
+        if(Vector3.Distance(ordine.position, player.transform.position) < 2 )
+        {
 
-            if (Vector3.Distance(ordine.position, player.transform.position) < 2)
-            {
-                timer += Time.deltaTime;
-                
-                if (timer >= 2.5)
-                {
-                    next = true;
-                }
-            }
-        //if (Pronto())
-        //{
-        //}
-
-            if (next)
-            {
-             //piatto.name = "Ordine";
-
-             agent.SetDestination(Vector3.zero);
-             nextState = new Idle(agent, player, ordine, magazzino, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-             stage = Event.Exit;
-             return;
-            }
-
-
-
-
-
-        //if (Vector3.Distance(ordine.position, player.transform.position) < 2)
-        //{
-        //    Debug.Log("ce sto");
             
 
-        //        nextState = new RestoreFood(agent, player, ordine, magazzino, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-        //        stage = Event.Exit;
-        //        return;
+          if(scelta == DishType.Pizza)
+          {
+                
+                
+            if(Inventario.current.patate < 2 || Inventario.current.pomodori < 2)
+            {
 
-        //}
-    
+             nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+             stage = Event.Exit;
+             
+
+             Debug.Log("Mancano Ing.Pizza");
+
+            }
+            else
+            {
+             nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+             stage = Event.Exit;
+                Debug.Log("Andiamo a fare la Pizza");
+                return;
+
+            }
+          }
+
+
+
+         if (scelta == DishType.Pasta)
+         {
+                if (Inventario.current.carote < 2 || Inventario.current.patate < 2)
+                {
+
+                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
+                    //return;
+
+                    Debug.Log("Mancano Ing.Pasta");
+                }
+                else
+                {
+                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
+                    Debug.Log("Andiamo a fare la pasta");
+                    return;
+
+                }
+         }
+
+
+         if (scelta == DishType.Lasagna)
+         {
+                if (Inventario.current.pomodori < 2 || Inventario.current.carote < 2)
+                {
+
+                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
+
+
+                    Debug.Log("Mancano Ing.Lasagne");
+
+                }
+                else
+                {
+                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
+                    Debug.Log("Andiamo a fare le lasagne");
+                    return;
+
+                }
+         }
+
+
+
+        }
+
+      
+
+
+
         
     }
-
-    void SceltaOrdine(int n)
-    {
-        switch (n)
-        {
-            case 0:
-                piatto.name = "Pizza";
-                break;
-            case 1:
-                piatto.name = "Lasagna";
-                break;
-            case 2:
-                piatto.name = "Pasta";
-                break;
-        }
-    }
-
 
 
 
     public override void Exit()
     {
         base.Exit();
-        
     }
 }

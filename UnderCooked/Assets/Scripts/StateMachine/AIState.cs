@@ -9,7 +9,8 @@ public enum State
     Idle,
     TakeOrder,
     RestoreFood,
-    GoKitchen
+    GoKitchen,
+    DeliverPlate
 }
 
 public enum Event
@@ -30,7 +31,7 @@ public class AIState
     protected AIState nextState;
     protected NavMeshAgent agent;
     protected Transform ordine;
-    protected Transform magazzino;
+    protected Transform consegna;
     protected Transform cucina;
     protected GameObject piatto;
     protected Transform rifPizza, rifLasagna, rifPasta;
@@ -40,7 +41,7 @@ public class AIState
     float minuti;
 
 
-    public AIState(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _magazzino, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta)
+    public AIState(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta)
     {
         stage = Event.Enter;
        
@@ -50,7 +51,7 @@ public class AIState
 
         ordine = _ordine;
 
-        magazzino = _magazzino;
+        consegna = _consegna;
 
         cucina = _cucina;
 
@@ -83,31 +84,7 @@ public class AIState
         return this;
     }
 
-    //#region Ordini
 
-    //public bool Aperto()
-    //{
-    //    if (Giorno.current.minuti >= 20 && Giorno.current.minuti <= 24 || Giorno.current.minuti >= 0 && Giorno.current.minuti < 8)
-    //    {
-    //        return false;
-    //    }
-    //    else
-    //        return true;
-    //}
-
-    //public bool Pronto()
-    //{
-    //    if (piatto.name == "Pronto")
-    //    {
-    //        return true;
-    //    }
-    //    else if (piatto.name == "Ordine")
-    //    {
-    //        return false;
-    //    }
-
-    //    return false;
-    //}
 
     public bool IngrPizza()
     {

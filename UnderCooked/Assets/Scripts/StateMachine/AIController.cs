@@ -7,7 +7,7 @@ public class AIController : MonoBehaviour
 {
 
     [SerializeField] Transform ordine;
-    [SerializeField] Transform magazzino;
+    [SerializeField] Transform consegna;
     [SerializeField] Transform cucina;
     [SerializeField] Transform rifPizza;
     [SerializeField] Transform rifLasagna;
@@ -24,7 +24,7 @@ public class AIController : MonoBehaviour
     {
         agent = transform.GetComponent<NavMeshAgent>();
         
-        currentState = new Idle(agent, this.gameObject, ordine, magazzino, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+        currentState = new Idle(agent, this.gameObject, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
     }
 
     private void Update()

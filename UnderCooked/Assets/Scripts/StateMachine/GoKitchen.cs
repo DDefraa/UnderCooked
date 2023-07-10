@@ -7,7 +7,9 @@ using UnityEngine.AI;
 
 public class GoKitchen : AIState
 {
-    public GoKitchen(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _magazzino, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _magazzino, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
+    TakeOrder.DishType scelta;
+
+    public GoKitchen(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _consegna, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
     {
         name = State.GoKitchen;
     }
@@ -15,6 +17,25 @@ public class GoKitchen : AIState
     public override void Enter()
     {
         base.Enter();
+        
+            if (scelta == TakeOrder.DishType.Pizza)
+            {
+                Inventario.current.pomodori--;
+                Inventario.current.patate--;
+                return;
+            }
+            if (scelta == TakeOrder.DishType.Lasagna)
+            {
+                Inventario.current.pomodori--;
+                Inventario.current.carote--;
+                return;
+            }
+            if (scelta == TakeOrder.DishType.Pasta)
+            {
+                Inventario.current.carote--;
+                Inventario.current.patate--;
+                return;
+            }
         
     }
     public override void Update()
@@ -25,7 +46,8 @@ public class GoKitchen : AIState
 
         if (Vector3.Distance(cucina.position, player.transform.position) < 2)
         {
-            nextState = new Idle(agent, player, ordine, magazzino, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+
+            nextState = new DeliverPlate(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
             stage = Event.Exit;
             return;
         }

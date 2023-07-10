@@ -301,7 +301,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ordine: {fileID: 738598004}
-  magazzino: {fileID: 1248890960}
+  consegna: {fileID: 2079893090}
   cucina: {fileID: 1300306038}
   rifPizza: {fileID: 643156755}
   rifLasagna: {fileID: 124726614}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 598129794}
   - component: {fileID: 598129793}
   m_Layer: 0
-  m_Name: M_Carote
+  m_Name: M_Pasta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 794124855}
   - component: {fileID: 794124854}
   m_Layer: 0
-  m_Name: M_Pomodori
+  m_Name: M_Lasagna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 1416972831}
   - component: {fileID: 1416972830}
   m_Layer: 0
-  m_Name: M_Patate
+  m_Name: M_Pizza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1135,7 +1135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416972828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 1, z: 1.45}
+  m_LocalPosition: {x: -6.49, y: 1, z: 5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
