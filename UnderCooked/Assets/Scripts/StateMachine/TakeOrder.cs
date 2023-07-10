@@ -15,16 +15,17 @@ public class TakeOrder : AIState
     {
         Pizza,
         Lasagna,
-        Pasta
+        Pasta,
+        vuoto
     }
 
     public static DishType scelta;
 
-    
 
-    
 
-    
+
+
+
 
     public TakeOrder(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _consegna, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
     {
@@ -33,57 +34,57 @@ public class TakeOrder : AIState
 
     public override void Enter()
     {
-        base.Enter();
-        
-        scelta = (DishType)UnityEngine.Random.Range(0, 2);
+
+        scelta = (DishType)UnityEngine.Random.Range(0, 3);
         Debug.Log(scelta);
         agent.SetDestination(ordine.position);
 
         //int numero = RestoreFood.num;
-       
+        base.Enter();
+
     }
 
     public override void Update()
     {
-    
+
 
 
         base.Update();
 
-        if(Vector3.Distance(ordine.position, player.transform.position) < 2 )
+        if (Vector3.Distance(ordine.position, player.transform.position) < 2)
         {
 
+
+
+            
             
 
-          if(scelta == DishType.Pizza)
-          {
-                
-                
-            if(Inventario.current.patate < 2 || Inventario.current.pomodori < 2)
-            {
 
-             nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-             stage = Event.Exit;
-             
+                if (Inventario.current.patate == 0 || Inventario.current.pomodori == 0 && scelta == DishType.Pizza)
+                {
 
-             Debug.Log("Mancano Ing.Pizza");
+                    nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
 
-            }
-            else
-            {
-             nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-             stage = Event.Exit;
-                Debug.Log("Andiamo a fare la Pizza");
-                return;
 
-            }
-          }
+                    Debug.Log("Mancano Ing.Pizza");
+
+                }
+                else
+                {
+                    nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
+                    stage = Event.Exit;
+                    Debug.Log("Andiamo a fare la Pizza");
+                    return;
+
+                }
+            
 
 
 
-         if (scelta == DishType.Pasta)
-         {
-                if (Inventario.current.carote < 2 || Inventario.current.patate < 2)
+            
+            
+                if (Inventario.current.carote == 0 || Inventario.current.patate == 0 && scelta == DishType.Pasta)
                 {
 
                     nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
@@ -100,12 +101,12 @@ public class TakeOrder : AIState
                     return;
 
                 }
-         }
+            
 
 
-         if (scelta == DishType.Lasagna)
-         {
-                if (Inventario.current.pomodori < 2 || Inventario.current.carote < 2)
+            
+            
+                if (Inventario.current.pomodori == 0 || Inventario.current.carote == 0 && scelta == DishType.Lasagna)
                 {
 
                     nextState = new RestoreFood(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
@@ -123,17 +124,17 @@ public class TakeOrder : AIState
                     return;
 
                 }
-         }
+            
 
 
 
         }
 
-      
 
 
 
-        
+
+
     }
 
 

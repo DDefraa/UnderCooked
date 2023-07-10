@@ -301,7 +301,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -343,9 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e81d88a8b80f3645b7b3de5e041fb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patate: 3
-  pomodori: 3
-  carote: 3
+  patate: 0
+  pomodori: 0
+  carote: 0
 --- !u!1 &364003599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416972828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.49, y: 1, z: 5.98}
+  m_LocalPosition: {x: -5.08, y: 1, z: 1.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

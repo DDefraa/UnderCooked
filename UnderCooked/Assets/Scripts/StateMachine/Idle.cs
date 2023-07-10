@@ -13,13 +13,13 @@ public class Idle : AIState
         name = State.Idle;
 
         this.ordine = _ordine;
-        this.consegna = _consegna; 
+        this.consegna = _consegna;
         this.cucina = _cucina;
         this.piatto = _piatto;
         this.rifPizza = _rifPizza;
         this.rifLasagna = _rifLasagna;
         this.rifPasta = _rifPasta;
-        
+
     }
 
     //public Idle(NavMeshAgent agent, GameObject gameObject, Transform ordine, Transform magazzino)
@@ -32,9 +32,10 @@ public class Idle : AIState
 
     public override void Enter()
     {
+        TakeOrder.scelta = TakeOrder.DishType.vuoto;
         base.Enter();
-        
-        
+
+
     }
     public override void Update()
     {
@@ -42,7 +43,7 @@ public class Idle : AIState
 
         agent.SetDestination(Vector3.zero);
 
-        if(Vector3.Distance(Vector3.zero, player.transform.position) < 2)
+        if (Vector3.Distance(Vector3.zero, player.transform.position) < 2)
         {
             nextState = new TakeOrder(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
             stage = Event.Exit;

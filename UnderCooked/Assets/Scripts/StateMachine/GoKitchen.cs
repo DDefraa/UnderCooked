@@ -17,26 +17,26 @@ public class GoKitchen : AIState
     public override void Enter()
     {
         base.Enter();
-        
-            if (scelta == TakeOrder.DishType.Pizza)
-            {
-                Inventario.current.pomodori--;
-                Inventario.current.patate--;
-                return;
-            }
-            if (scelta == TakeOrder.DishType.Lasagna)
-            {
-                Inventario.current.pomodori--;
-                Inventario.current.carote--;
-                return;
-            }
-            if (scelta == TakeOrder.DishType.Pasta)
-            {
-                Inventario.current.carote--;
-                Inventario.current.patate--;
-                return;
-            }
-        
+
+        if (scelta == TakeOrder.DishType.Pizza)
+        {
+            Inventario.current.pomodori--;
+            Inventario.current.patate--;
+           
+        }
+        if (scelta == TakeOrder.DishType.Lasagna)
+        {
+            Inventario.current.pomodori--;
+            Inventario.current.carote--;
+           
+        }
+        if (scelta == TakeOrder.DishType.Pasta)
+        {
+            Inventario.current.carote--;
+            Inventario.current.patate--;
+            
+        }
+
     }
     public override void Update()
     {

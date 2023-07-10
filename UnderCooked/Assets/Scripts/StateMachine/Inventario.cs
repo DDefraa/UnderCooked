@@ -24,6 +24,6 @@ public class Inventario : MonoBehaviour
     public int patate;
     public int pomodori;
     public int carote;
-    
-   
+
+
 }

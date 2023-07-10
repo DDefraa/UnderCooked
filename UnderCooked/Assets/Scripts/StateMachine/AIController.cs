@@ -23,7 +23,7 @@ public class AIController : MonoBehaviour
     private void Start()
     {
         agent = transform.GetComponent<NavMeshAgent>();
-        
+
         currentState = new Idle(agent, this.gameObject, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
     }
 
@@ -33,5 +33,5 @@ public class AIController : MonoBehaviour
         //Debug.Log(currentState.name);
     }
 
-    
+
 }

@@ -44,9 +44,9 @@ public class AIState
     public AIState(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta)
     {
         stage = Event.Enter;
-       
+
         agent = _agent;
-        
+
         player = _player;
 
         ordine = _ordine;
@@ -63,8 +63,8 @@ public class AIState
 
         rifPasta = _rifPasta;
 
-        
-        
+
+
     }
 
     public virtual void Enter() { stage = Event.Update; }

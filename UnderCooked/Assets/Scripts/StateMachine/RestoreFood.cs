@@ -7,77 +7,81 @@ using UnityEngine.AI;
 public class RestoreFood : AIState
 {
 
-    TakeOrder.DishType scelta;
-    public static int num;
+    public static TakeOrder.DishType scelta;
+    public static int num = 0;
 
     public RestoreFood(NavMeshAgent _agent, GameObject _player, Transform _ordine, Transform _consegna, Transform _cucina, GameObject _piatto, Transform _rifPizza, Transform _rifLasagna, Transform _rifPasta) : base(_agent, _player, _ordine, _consegna, _cucina, _piatto, _rifPizza, _rifLasagna, _rifPasta)
     {
         name = State.RestoreFood;
     }
 
-   public override void Enter()
+    public override void Enter()
     {
         base.Enter();
-        
-        
-       if(scelta == TakeOrder.DishType.Pizza)
-       {
-            num = 1;
-            agent.SetDestination(rifPizza.position);
-            Debug.Log(num);
-       }
-       if(scelta == TakeOrder.DishType.Lasagna)
-       {
-            num = 2;
-            agent.SetDestination(rifLasagna.position);
-            Debug.Log(num);
-        }
-       if(scelta == TakeOrder.DishType.Pasta)
-       {
-            num = 3;
-            agent.SetDestination(rifPasta.position);
-            Debug.Log(num);
-        }
+
+       
+
+        //if (scelta == TakeOrder.DishType.Pizza)
+        //{
+        //    num = 0;
+        //    // agent.SetDestination(rifPizza.position);
+        //    Debug.Log(num);
+        //}
+        //if (scelta == TakeOrder.DishType.Lasagna)
+        //{
+        //    num = 1;
+        //    // agent.SetDestination(rifLasagna.position);
+        //    Debug.Log(num);
+        //}
+        //if (scelta == TakeOrder.DishType.Pasta)
+        //{
+        //    num = 2;
+        //    // agent.SetDestination(rifPasta.position);
+        //    Debug.Log(num);
+        //}
     }
     public override void Update()
     {
         base.Update();
 
-        switch (num)
+        switch (scelta)
         {
-            case 1:
-                //agent.SetDestination(rifPizza.position);
+            case TakeOrder.DishType.Pizza:
+                Debug.Log(agent.transform.position);
+                agent.SetDestination(rifPizza.position);
 
                 if (Vector3.Distance(rifPizza.position, player.transform.position) < 2)
                 {
-                    Inventario.current.patate++;
-                    Inventario.current.pomodori++;
+                    Inventario.current.patate = 3;
+                    Inventario.current.pomodori = 3;
                     Debug.Log("Cuciniamo la Pizza con nuovi ing");
                     nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
                     stage = Event.Exit;
                 }
                 break;
 
-            case 2:
-                //agent.SetDestination(rifLasagna.position);
+            case TakeOrder.DishType.Lasagna:
+                Debug.Log(agent.transform.position);
+                agent.SetDestination(rifLasagna.position);
 
                 if (Vector3.Distance(rifLasagna.position, player.transform.position) < 2)
                 {
-                    Inventario.current.carote++;
-                    Inventario.current.pomodori++;
+                    Inventario.current.carote = 3;
+                    Inventario.current.pomodori = 3;
                     Debug.Log("Cuciniamo la Lasagana con nuovi ing");
                     nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
                     stage = Event.Exit;
                 }
                 break;
 
-            case 3:
-                //agent.SetDestination(rifPasta.position);
+            case TakeOrder.DishType.Pasta:
+                Debug.Log(agent.transform.position);
+                agent.SetDestination(rifPasta.position);
 
                 if (Vector3.Distance(rifPasta.position, player.transform.position) < 2)
                 {
-                    Inventario.current.patate++;
-                    Inventario.current.carote++;
+                    Inventario.current.patate = 3;
+                    Inventario.current.carote = 3;
                     Debug.Log("Cuciniamo la Pasta con nuovi ing");
                     nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
                     stage = Event.Exit;
@@ -85,52 +89,7 @@ public class RestoreFood : AIState
                 break;
         }
 
-        //if (scelta == TakeOrder.DishType.Pizza)
-        //{
-        //    agent.SetDestination(rifPizza.position);
 
-        //    if (Vector3.Distance(rifPizza.position, player.transform.position) < 2) 
-        //    {
-        //        Inventario.current.patate++;
-        //        Inventario.current.pomodori++;
-        //        Debug.Log("Cuciniamo la Pizza con nuovi ing");
-        //        nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-        //        stage = Event.Exit;
-
-        //    }
-
-        //}
-        //if (scelta == TakeOrder.DishType.Lasagna)
-        //{
-        //    agent.SetDestination(rifLasagna.position);
-
-        //    if (Vector3.Distance(rifLasagna.position, player.transform.position) < 2)
-        //    {
-        //        Inventario.current.carote++;
-        //        Inventario.current.pomodori++;
-        //        Debug.Log("Cuciniamo la Lasagan con nuovi ing");
-        //        nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-        //        stage = Event.Exit;
-
-        //    }
-
-        //}
-        //if (scelta == TakeOrder.DishType.Pasta)
-        //{
-        //    agent.SetDestination(rifPasta.position);
-
-        //    if (Vector3.Distance(rifPasta.position, player.transform.position) < 2)
-        //    {
-        //        Inventario.current.patate++;
-        //        Inventario.current.carote++;
-        //        Debug.Log("Cuciniamo la Pizza con nuovi ing");
-        //        nextState = new GoKitchen(agent, player, ordine, consegna, cucina, piatto, rifPizza, rifLasagna, rifPasta);
-        //        stage = Event.Exit;
-
-        //    }
-
-
-        //}
 
 
     }
